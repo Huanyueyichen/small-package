@@ -7,7 +7,7 @@ on:
       - '.github/workflows/main.yml'
       - 'diy/**'
   schedule:
-    - cron: 30 4,16 * * *
+    - cron: 0 4,16 * * *
   watch:
     types: started
   repository_dispatch:
