@@ -1,5 +1,5 @@
 // Main JavaScript file for the Netdata GUI.
-
+// 翻译 By Jason
 // Codacy declarations
 /* global NETDATA */
 
@@ -1511,7 +1511,7 @@ function headMain(os, charts, duration) {
     if (typeof charts['system.io'] !== 'undefined') {
         head += '<div class="netdata-container" style="margin-right: 10px;" data-netdata="system.io"'
             + ' data-dimensions="in"'
-            + ' data-chart-library="easypiechart"'
+            + ' data-chart-library="easypiechart""'
             + ' data-title="磁碟读取"'
             + ' data-width="11%"'
             + ' data-before="0"'
@@ -1831,10 +1831,12 @@ function renderPage(menus, data) {
       data.alarms_count.toLocaleString() + '</strong> 警报.';
 
     if (!isMemoryModeDbEngine) {
-        sidebar += '<br />&nbsp;<br />获取更多历史记录 ';
+        sidebar += '<br />&nbsp;<br />获取更多历史记录 ' +
+          '<a href="https://learn.netdata.cloud/guides/longer-metrics-storage#using-the-round-robin-database" target=_blank>配置Netdata\'s <strong>历史</strong></a> 或使用 <a href="https://learn.netdata.cloud/docs/agent/database/engine/" target=_blank>DB 引擎.</a>';
     }
 
     sidebar += '<br/>&nbsp;<br/><strong>netdata</strong><br/>' + data.version.toString() + '</small></li>';
+
     sidebar += '</ul>';
     div.innerHTML = html;
     document.getElementById('sidebar').innerHTML = sidebar;
@@ -2037,7 +2039,7 @@ function clipboardCopyBadgeEmbed(url) {
 function alarmsUpdateModal() {
     var active = '<h3>触发警报</h3><table class="table">';
     var all = '<h3>所有作用中的警报</h3><div class="panel-group" id="alarms_all_accordion" role="tablist" aria-multiselectable="true">';
-    var footer = '<hr/><a href="https://github.com/netdata/netdata/tree/master/web/api/badges#netdata-badges" target="_blank">netdata badges</a> 会自动重新整理。不同颜色分表代表的警报状态：<span style="color: #e05d44"><b>&nbsp;红色&nbsp;</b></span> 表示重大，<span style="color:#fe7d37"><b>&nbsp;橘色&nbsp;</b></span> 表示警告，<span style="color: #4c1"><b>&nbsp;绿色&nbsp;</b></span> 表示良好，<span style="color: #9f9f9f"><b>&nbsp;灰色&nbsp;</b></span> 表示未定义 (例如无资料或无状态)，<span style="color: #000"><b>&nbsp;黑色&nbsp;</b></span> 表示尚未初始化。您可以复制这里的网址并将它们嵌入到任一个网页。<br/>netdata 能够发送这些警报通知。请参阅 <a href="https://github.com/netdata/netdata/blob/master/health/notifications/health_alarm_notify.conf">这个设定档</a> 了解更多资讯。';
+    var footer = '<hr/><a href="https://github.com/netdata/netdata/tree/master/web/api/badges#netdata-badges" target="_blank">netdata badges</a> 会自动重新整理。不同颜色分表代表的警报状态： <span style="color: #e05d44"><b>&nbsp;红色&nbsp;</b></span> 表示重大, <span style="color:#fe7d37"><b>&nbsp;橘色&nbsp;</b></span> 表示警告, <span style="color: #4c1"><b>&nbsp;绿色&nbsp;</b></span> 表示良好, <span style="color: #9f9f9f"><b>&nbsp;灰色&nbsp;</b></span> 表示未定义 (例如无资料或无状态), <span style="color: #000"><b>&nbsp;黑色&nbsp;</b></span> 表示尚未初始化。您可以复制这里的网址并将它们嵌入到任一个网页。<br/>netdata 能够发送这些警报通知。请参阅 <a href="https://github.com/netdata/netdata/blob/master/health/notifications/health_alarm_notify.conf" target="_blank">这个设定档</a> 了解更多资讯。';
 
     loadClipboard(function () {
     });
@@ -2314,7 +2316,7 @@ function alarmsUpdateModal() {
         all += "</div>";
 
         if (!count_active) {
-            active += '<div style="width:100%; height: 100px; text-align: center;"><span style="font-size: 50px;"><i class="fas fa-thumbs-up"></i></span><br/>Everything is normal. No raised alarms.</div>';
+            active += '<div style="width:100%; height: 100px; text-align: center;"><span style="font-size: 50px;"><i class="fas fa-thumbs-up"></i></span><br/>一切正常。没有警报。</div>';
         } else {
             active += footer;
         }
@@ -2573,7 +2575,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'duration',
-                        title: '上次持续时间',
+                        title: 'Last Duration',
                         titleTooltip: 'The duration the alarm was at its previous state, just before this event',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2587,7 +2589,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'non_clear_duration',
-                        title: '提升的持续时间',
+                        title: 'Raised Duration',
                         titleTooltip: 'The duration the alarm was raised, just before this event',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2601,7 +2603,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'recipient',
-                        title: '收件人',
+                        title: 'Recipient',
                         titleTooltip: 'The recipient of this event',
                         align: 'center',
                         valign: 'middle',
@@ -2610,7 +2612,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'processed',
-                        title: '已处理状态',
+                        title: 'Processed Status',
                         titleTooltip: 'True when this event is processed',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2629,7 +2631,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'updated',
-                        title: '更新的状态',
+                        title: 'Updated Status',
                         titleTooltip: 'True when this event has been updated by another event',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2648,7 +2650,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'updated_by_id',
-                        title: '由ID更新',
+                        title: 'Updated By ID',
                         titleTooltip: 'The unique ID of the event that obsoleted this one',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2662,7 +2664,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'updates_id',
-                        title: '更新ID',
+                        title: 'Updates ID',
                         titleTooltip: 'The unique ID of the event obsoleted because of this event',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2676,7 +2678,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'exec',
-                        title: '脚本',
+                        title: 'Script',
                         titleTooltip: 'The script to handle the event notification',
                         align: 'center',
                         valign: 'middle',
@@ -2685,7 +2687,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'exec_run',
-                        title: '脚本运行时间',
+                        title: 'Script Run At',
                         titleTooltip: 'The date and time the script has been ran',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2699,7 +2701,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'exec_code',
-                        title: '脚本返回值',
+                        title: 'Script Return Value',
                         titleTooltip: 'The return code of the script',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2718,7 +2720,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'delay',
-                        title: '脚本延迟',
+                        title: 'Script Delay',
                         titleTooltip: 'The hysteresis of the notification',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2733,7 +2735,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'delay_up_to_timestamp',
-                        title: '脚本延迟运行时间',
+                        title: 'Script Delay Run At',
                         titleTooltip: 'The date and time the script should be run, after hysteresis',
                         formatter: function (value, row, index) {
                             void (row);
@@ -2747,7 +2749,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'info',
-                        title: '描述',
+                        title: '说明',
                         titleTooltip: 'A short description of the alarm',
                         align: 'center',
                         valign: 'middle',
@@ -2756,7 +2758,7 @@ function alarmsUpdateModal() {
                     },
                     {
                         field: 'source',
-                        title: '报警源',
+                        title: '警报来源',
                         titleTooltip: 'The source of configuration of the alarm',
                         align: 'center',
                         valign: 'middle',
@@ -2972,7 +2974,7 @@ function getGithubLatestVersion(callback) {
             callback(data);
         })
         .fail(function () {
-            versionLog('从 github 下载最新版本 ID 失败。');
+            versionLog('从 github 下载最新版本 ID 失败！');
             callback(null);
         });
 }
@@ -3045,10 +3047,19 @@ function notifyForUpdate(force) {
 
         if (sha1 === null) {
             save = false;
-            versionLog('<p><big>取得您的 netdata 版本失败！</big></p>');
-        else {
+            versionLog('<p><big>取得您的 netdata 版本失败！</big></p><p>You can always get the latest netdata from <a href="https://github.com/netdata/netdata" target="_blank">its github page</a>.</p>');
+        } else if (sha2 === null) {
+            save = false;
+            versionLog('<p><big>从 github 取得 netdata 最新版本失败。</big></p><p>您也可以从 <a href="https://github.com/netdata/netdata" target="_blank">its github page</a> 取得最新 netdata 版本。</p>');
+        } else if (versionsMatch(sha1, sha2)) {
             save = true;
-            versionLog('<p><big>您已经是最新版本的 netdata！</big></p>');
+            versionLog('<p><big>您已经是最新版本的 netdata！</big></p><p>还没有更新？<br/>或许，我们还需要一些动力继续前进！</p><p>如果您还没有做好更新的准备，请您  <a href="https://github.com/netdata/netdata" target="_blank">到 github 给 netdata <b><i class="fas fa-star"></i></b> at its github page</a>.</p>');
+        } else {
+            save = true;
+            var compare = 'https://learn.netdata.cloud/docs/agent/changelog/';
+            versionLog('<p><big><strong>New version of netdata available!</strong></big></p><p>Latest version: <b><code>' + sha2 + '</code></b></p><p><a href="' + compare + '" target="_blank">Click here for the changes log</a> and<br/><a href="https://github.com/netdata/netdata/tree/master/packaging/installer/UPDATE.md" target="_blank">click here for directions on updating</a> your netdata installation.</p><p>We suggest to review the changes log for new features you may be interested, or important bug fixes you may need.<br/>Keeping your netdata updated is generally a good idea.</p>');
+
+            document.getElementById('update_badge').innerHTML = '!';
         }
 
         if (save) {
@@ -4253,6 +4264,7 @@ function runOnceOnDashboardWithjQuery() {
             versionLog('checking, please wait...');
         })
         .on('shown.bs.modal', function () {
+            notifyForUpdate(true);
         });
 
     // ------------------------------------------------------------------------
@@ -4472,6 +4484,7 @@ function finalizePage() {
             ga('send', 'pageview', '/demosite/' + window.location.host);
         }, 2000);
     } else {
+        notifyForUpdate();
     }
 
     if (urlOptions.show_alarms === true) {

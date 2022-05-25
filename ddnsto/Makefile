@@ -14,7 +14,7 @@ PKG_VERSION:=0.3.1
 PKG_RELEASE:=2
 PKG_SOURCE:=$(PKG_NAME)-binary-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=http://fw.koolcenter.com/binary/ddnsto/
-PKG_HASH:=skip
+PKG_HASH:=2f066540cad16e1ccdaad626937578bfb5c1a13479bd54f36373c479eb4b02d6
 
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-binary-$(PKG_VERSION)
 
